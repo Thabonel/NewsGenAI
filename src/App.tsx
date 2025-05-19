@@ -4,6 +4,7 @@ import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import HowItWorks from './pages/HowItWorks';
 import Pricing from './pages/Pricing';
+import Examples from './pages/Examples';
 import VideoGenerator from './components/video-generation/VideoGenerator';
 import { VideoProvider } from './context/VideoContext';
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/examples" element={<Examples />} />
             <Route path="/create" element={<VideoGenerator />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
