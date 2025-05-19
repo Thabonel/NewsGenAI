@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { stripePromise, type StripePriceId, stripePrices } from '../lib/stripe';
+import { stripePromise, type TierId, tiers } from '../lib/stripe';
 
 export function useStripe() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createCheckoutSession = async (priceId: StripePriceId) => {
+  const createCheckoutSession = async (tierId: TierId) => {
     try {
       setLoading(true);
       setError(null);
@@ -19,7 +19,7 @@ export function useStripe() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          priceId: stripePrices[priceId],
+          priceId: tiers[tierId].priceId,
         }),
       });
 
