@@ -9,6 +9,12 @@ Deno.serve(async (req) => {
   try {
     const { priceId } = await req.json();
 
+    // Determine if this is a subscription or one-time payment based on the price ID
+    const mode = [
+      'price_1RQaS9DXysaVZSVhqi7uN571',
+      'price_1RQaS9DXysaVZSVhrsMyfHOk'
+    ].includes(priceId) ? 'subscription' : 'payment';
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
@@ -17,7 +23,7 @@ Deno.serve(async (req) => {
           quantity: 1,
         },
       ],
-      mode: "subscription",
+      mode,
       success_url: `${req.headers.get("origin")}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/payment/canceled`,
     });
